@@ -1,0 +1,41 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    //licna karta, pasos, vozacka
+    string ime,prezime;
+    int n,a,b,c,zb=0,index;
+    //int mat[n][3];
+    priority_queue<pair<int,int>>red;
+
+    cin>>n;
+    pair<string, string> niza[n]; //reden broj/indeks +podatoci
+    //int doc[n]= {0};
+    for(int i=0; i<n; i++)
+    {
+        zb=0;
+        cin>>ime>>prezime;
+        niza[i]=make_pair(ime,prezime);
+        cin>>a>>b>>c;
+
+        if(a+b+c==0)
+            cout<<niza[i].first<<" "<<niza[i].second<<endl;
+        else
+        {
+            zb=a*4+b*2+c*1;
+            red.push(make_pair(zb,i));  //par od index i prioritet
+        }
+
+    }
+
+    while(!red.empty())
+    {
+        pair<int, int> top = red.top();
+        cout<<niza[top.second].first<<" "<<niza[top.second].second<<endl;
+        red.pop();
+    }
+    //po koj redosled zavrsuvaat
+    return 0;
+}
