@@ -1,0 +1,67 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n;
+    map<string, string> mapa;
+    cin>>n;
+    string ime,lozinka,najava=" ",pass;
+    int brojac1=0,brojac=0;
+    pair<string,string>input[n];
+
+    for(int i=0;i<n;i++)
+    {
+        cin>>ime>>lozinka;
+        mapa[ime]=lozinka;
+    }
+
+    bool f=false,f1=true;
+    while(f1)
+    {
+        cin>>najava;
+        if(najava=="KRAJ")
+        {
+            f1=false;
+            break;
+        }
+        else
+            cin>>pass;
+        input[brojac]=make_pair(ime,pass);
+        brojac++;
+    }
+
+    while(f!=true && brojac1!=brojac)
+    {
+        brojac1++;
+        string input_ime=input[brojac1].first;
+        if(input[brojac1].second==mapa[input_ime])
+        {
+            f=true;
+            cout<<"Najaven";
+        }
+        else
+            cout<<"Nenajaven ";
+    }
+    return 0;
+}
+
+
+//Test
+/*
+3 ana banana pero zdero trpe trpi ana ana ana banana trpe trpi KRAJ
+*/
+
+/*4
+ana 1
+jana 2
+lena 3
+ina 4
+ana ana 
+ana 2
+jana 3
+lina 1
+lina jana
+KRAJ
+*/
