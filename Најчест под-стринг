@@ -1,0 +1,52 @@
+#include <iostream>
+#include <bits/stdc++.h>
+#include <iterator>
+#include <map>
+using namespace std;
+
+int main()
+{
+
+    string s,t="",maks="";
+    cin>>s;
+    int n;
+    n=s.size();
+    map<string,int>pod_str;
+
+
+    for(int i=0; i<s.size(); i++)
+    {
+        t="";
+        for(int j=i; j<s.size(); j++)
+        {
+            t=t+s[j]; //podsrtringot
+            pod_str[t]=pod_str[t]+1;
+        }
+    }
+
+
+
+    for (const auto& i:pod_str)
+    {
+        if(i.second>pod_str[maks]) //spored povtoruvanja
+        {
+            maks=i.first;
+        }
+        if(i.second==pod_str[maks]) //povtroruvanja
+        {
+            if(i.first.size()>maks.size()) //spored dolzina
+            {
+                maks=i.first;
+            }
+            else if(i.first.size()==maks.size() && i.first<maks)  //leksikogravski
+            {
+                maks=i.first;
+            }
+
+        }
+    }
+
+    cout<<maks;
+
+    return 0;
+}
