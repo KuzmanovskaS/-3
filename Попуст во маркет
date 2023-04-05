@@ -1,0 +1,47 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n,d,h,m,brojac=0,rez=0;
+    int stiga,odi;
+    string s;
+    cin>>n;
+    priority_queue<int>red;
+    priority_queue<pair<int,int>>luge;
+
+    for(int i=0;i<n;i++)
+    {
+        cin>>s>>d;
+        h=stoi(s.substr(0,2));
+        m=stoi(s.substr(3,2));
+        stiga=h*60+m;
+        odi=stiga+d;
+        stiga=stiga*-1;  //zaradi priority (da bidat od porano vreme kon pokasno)
+        luge.push(pair<int,int>(stiga,odi));
+    }
+
+    while(!luge.empty())
+    {
+        stiga=luge.top().first*-1;
+        odi=luge.top().second;
+        luge.pop();
+
+        while(!red.empty() && (red.top()*-1)<=stiga)
+        {
+            red.pop();
+            brojac--;
+        }
+
+        red.push(odi*-1);
+        brojac++;
+
+        if(brojac>rez)
+            rez=brojac;
+    }
+
+    cout<<rez;
+
+    return 0;
+}
